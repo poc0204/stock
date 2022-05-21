@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='./css/login.css') }}">
+    <script src="{{ url_for('static', filename='./js/login.js') }}" type="text/javascript" ></script> 
+    <title>Login</title>
+</head>
+<body>
+   
+    <form action="/login_db" class="longin" method="post">
+        <a href="/"><h1>上市個股資金流向</h1></a>
+        <input type="text" placeholder="E-mail" />
+        <input type="password" placeholder="密碼" />
+        <input type="submit" value="登入">
+        <a href="/signup">註冊新帳號</a> / <a>忘記密碼</a> 
+    </form> 
+    
+</body>
+</html>

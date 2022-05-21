@@ -1,0 +1,59 @@
+body{
+    font-family: Roboto;
+    background-color: #e76f51;
+   
+    display:flex;
+    align-items: center;
+    justify-content:center;
+ 
+}
+
+.signup{
+    background-color: #0b132b;
+    width: 400px;
+    color: #f8f9fa;
+    padding:  40px;
+    box-shadow: 10px 10px 25px #000022;
+    text-align: center;
+    margin-top: 10%;
+    border-radius: 20px;
+}
+
+.signup input{
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    background: none;
+    padding: 10px;
+    font-size:  15px;
+    border-radius:  22px;
+    outline:  none;
+    color: #f8f9fa
+}
+
+.signup input[type="text"], .signup input[type="password"]{
+    border: 2px solid #3498db;
+    width: 220px;
+}
+
+.signup input[type="submit"]{
+    width: 150px;
+    border: 2px solid #2ecc71;
+    cursor:pointer;/* 滑鼠移到這便手指*/
+}
+
+.signup input[type="text"]:focus, .signup input[type="password"]:focus{
+
+    border-color: #2ecc71;
+    width: 280px;
+    transition: 0.5s;
+}
+
+.signup input[type="submit"]:hover{
+    background-color: #2ecc71;
+    transition: 0.5s;
+}
+.signup > a {
+    text-decoration:none;
+    color:white;
+}

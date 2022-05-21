@@ -1,0 +1,59 @@
+body{
+    font-family: Roboto;
+    background-color: #e76f51;
+   
+    display:flex;
+    align-items: center;
+    justify-content:center;
+ 
+}
+
+.longin{
+    background-color: #0b132b;
+    width: 400px;
+    color: #f8f9fa;
+    padding:  40px;
+    box-shadow: 10px 10px 25px #000022;
+    text-align: center;
+    margin-top: 10%;
+    border-radius: 20px;
+}
+
+.longin input{
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    background: none;
+    padding: 10px;
+    font-size:  15px;
+    border-radius:  22px;
+    outline:  none;
+    color: #f8f9fa
+}
+
+.longin input[type="text"], .longin input[type="password"]{
+    border: 2px solid #3498db;
+    width: 220px;
+}
+
+.longin input[type="submit"]{
+    width: 150px;
+    border: 2px solid #2ecc71;
+    cursor:pointer;/* 滑鼠移到這便手指*/
+}
+
+.longin input[type="text"]:focus, .longin input[type="password"]:focus{
+
+    border-color: #2ecc71;
+    width: 280px;
+    transition: 0.5s;
+}
+
+.longin input[type="submit"]:hover{
+    background-color: #2ecc71;
+    transition: 0.5s;
+}
+.longin > a {
+    text-decoration:none;
+    color:white;
+}

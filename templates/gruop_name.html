@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='./css/gruop_name.css') }}">
+    <script src="{{ url_for('static', filename='./js/gruop_name.js') }}" type="text/javascript " ></script> 
+    <title>Stock_group</title>
+</head>
+<body>
+    {% extends 'head.html' %}
+    {% block header %}
+    <group_second class="group_second" id="group_second">
+        <div class="group_second_size">
+            <div class="group_second_content">
+                <h1>上市<span class="group_name" id ="group_name"></span></h1>
+                <div class="group">
+                    <ul>
+                        <li id="group">  
+                            <b>成交</b>
+                        </li>
+                    </ul>
+                   
+                    <ul>
+                        <li id="group_up_or_down">  
+                            <b>漲跌</b>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li id="group_up_or_down_point">  
+                            <b>漲幅</b>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li id ="group_money">  
+                            <b>金額(億)</b>
+                        </li>
+                    </ul>
+                </div>
+                <div class="group_second_search">
+                    <input id="keyword" name = "keyword" placeholder="查詢上市個股"  type="text"></input>
+                    <button class="search_btn" onclick="select_click()" ><img src="{{ url_for('static', filename='images/seach.png')}}" ></button>
+                </div>
+            </div>
+        
+        
+        </div>
+    </group_second>
+    <div class="group_third_out" id="group_third_out">
+        <div class="group_third" id="group_third">
+            <div>
+                <h1>上市<span class="group_name" id ="group_name_third"></span></h1>
+                    <table class="input_group_name" id="input_group_name" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td class="group_name_title">代號</td>
+                            <td class="group_name_title">名稱</td>
+                            <td class="group_name_title">收盤</td>
+                            <td class="group_name_title">漲跌</td>
+                            <td class="group_name_title">漲幅</td>
+                            <td class="group_name_title">開盤</td>
+                            <td class="group_name_title">最高</td>
+                            <td class="group_name_title">最低</td>
+                            <td class="group_name_title">昨收</td>
+                            <td class="group_name_title">成交量</td>
+                        </tr>
+                      
+                    </table>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
