@@ -9,14 +9,14 @@
     <title>Login</title>
 </head>
 <body>
-   
-    <form action="/login_db" class="longin" method="post">
+    <div class="longin">
         <a href="/"><h1>上市個股資金流向</h1></a>
-        <input type="text" placeholder="E-mail" />
-        <input type="password" placeholder="密碼" />
-        <input type="submit" value="登入">
-        <a href="/signup">註冊新帳號</a> / <a>忘記密碼</a> 
-    </form> 
+        <input type="email" placeholder="E-mail" id="member_email" />
+        <input type="password" placeholder="密碼" id="member_password" />
+        <input type="submit" value="登入" onclick="login_click()">
+        <h3 id="error_massage"></h3>
+        <a href="/signup">註冊新帳號</a>  
+    </div>
     
 </body>
 </html>

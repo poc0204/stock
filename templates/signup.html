@@ -10,15 +10,15 @@
 </head>
 <body>
    
-    <form action="/signup_db" class="signup" method="post">
+        <div class="signup">
         <a href="/"><h1>上市個股資金流向</h1></a>
-        <input type="text" placeholder="E-mail" />
-        <input type="password" placeholder="密碼" />
-        <input type="password" placeholder="請再輸入一次密碼" />
-        <input type="text" placeholder="暱稱" />
-        <input type="submit" value="註冊">
+        <input type="text" id="new_member_name" placeholder="輸入姓名" autocomplete="off" >
+        <input type="email" id="new_member_email" placeholder="輸入電子信箱" autocomplete="off" >
+        <input  type="password" id="new_member_password" placeholder="輸入密碼" >
+        <input  type="password" id="new_member_password_confirm" placeholder="再次確認密碼" >
+        <input type="submit" value="註冊新帳號" onclick="create_new_member_click()">
+        <h3 id="new_member_error_massage"></h3>
         <a href="/login">已有帳號</a>
-    </form> 
-    
+        </div>
 </body>
 </html>

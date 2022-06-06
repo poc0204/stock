@@ -14,7 +14,7 @@
     <group_second class="group_second" id="group_second">
         <div class="group_second_size">
             <div class="group_second_content">
-                <h1>上市<span class="group_name" id ="group_name"></span></h1>
+                <h1 class="group_name" id ="group_name" ></h1>
                 <div class="group">
                     <ul>
                         <li id="group">  
@@ -34,14 +34,11 @@
                     </ul>
                     <ul>
                         <li id ="group_money">  
-                            <b>金額(億)</b>
+                            <b>成交量(張)</b>
                         </li>
                     </ul>
                 </div>
-                <div class="group_second_search">
-                    <input id="keyword" name = "keyword" placeholder="查詢上市個股"  type="text"></input>
-                    <button class="search_btn" onclick="select_click()" ><img src="{{ url_for('static', filename='images/seach.png')}}" ></button>
-                </div>
+          
             </div>
         
         
@@ -50,7 +47,7 @@
     <div class="group_third_out" id="group_third_out">
         <div class="group_third" id="group_third">
             <div>
-                <h1>上市<span class="group_name" id ="group_name_third"></span></h1>
+                <h2 class="group_name" id ="group_name_third"></h1>
                     <table class="input_group_name" id="input_group_name" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="group_name_title">代號</td>
@@ -63,6 +60,7 @@
                             <td class="group_name_title">最低</td>
                             <td class="group_name_title">昨收</td>
                             <td class="group_name_title">成交量</td>
+                            <td class="group_name_title">ˊ追蹤</td>
                         </tr>
                       
                     </table>

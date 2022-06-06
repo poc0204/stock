@@ -1,6 +1,11 @@
 import config
-import controllers.index , controllers.msql_error , controllers.update , controllers.stock_money , controllers.member ,controllers.login
-import controllers.signup , controllers.gruop_name
+import controllers.index , controllers.msql_error , controllers.update , controllers.stock_money , controllers.member
+import controllers.gruop_name , controllers.stock_name 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+config.app.config['SECRET_KEY'] = os.getenv('jwt_member')
 #域名
 host='0.0.0.0'
 #port 號

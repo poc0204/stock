@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 * reset */
 body, h1, ul { margin: 0px; }
+body{margin: 0px;}
 button { cursor: pointer;   }
 body::-webkit-scrollbar {
   display: none;
@@ -83,13 +84,11 @@ nav > button{
   background-color: white;
   border:0px;
   margin: 20px 10px 20px;
- font-size: 16px;
+  font-size: 16px;
 }
-nav > .loginout{
-display: none;
+nav > .member_name{
+  font-size: 16px;
 }
-
-
 footer{
     width: 100%;
     background-color: #757575;

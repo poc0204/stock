@@ -31,7 +31,7 @@ body{
     color: #f8f9fa
 }
 
-.longin input[type="text"], .longin input[type="password"]{
+.longin input[type="email"], .longin input[type="password"]{
     border: 2px solid #3498db;
     width: 220px;
 }
@@ -42,7 +42,7 @@ body{
     cursor:pointer;/* 滑鼠移到這便手指*/
 }
 
-.longin input[type="text"]:focus, .longin input[type="password"]:focus{
+.longin input[type="email"]:focus, .longin input[type="password"]:focus{
 
     border-color: #2ecc71;
     width: 280px;

@@ -1,10 +1,10 @@
 
 
-let address = 'pocworks.store'
+
 
 document.addEventListener("DOMContentLoaded",function(){
 
-  fetch(address+`api/stock_money`, {method: 'get'})
+  fetch(address_api+`api/stock_money`, {method: 'get'})
   .then(response =>{
     return  response.json()
   })

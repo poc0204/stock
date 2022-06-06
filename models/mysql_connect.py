@@ -24,15 +24,19 @@ def link_mysql():
         user=os.environ.get('aws_rds_user'),
         password=os.environ.get('aws_rds_password'),
         database=os.environ.get('database'),
-        charset='utf8'
+        charset='utf8',
+        ssl=False
         )
         conn = POOL.connection()
-          
+
     except:
             data ={
             'error':True
             }
+            print("error")
+            
             return data
+            
     else:
 	    return conn
  

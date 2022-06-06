@@ -28,27 +28,31 @@ def stock_money_update():
     update_or_number = []
     update_or_name = []
     #print(stock_money_data[i][2])
-    for i in range(30):
-        if group_name[i].string =='電子':
-            continue
-        update_or_number.append(group_number[i].string)
-        update_or_name.append(group_name[i].string)
-    for i in range(len(stock_money_data)):
-        if (float(stock_money_data[i][2]) == float(update_or_number[i][0:-1])) == False:
-            for i in range(len(stock_money_data)):
-                sql = " UPDATE stock_money SET Transaction_proportion={},Transaction_proportion_yesterday={},Transaction_proportion_vs={} where group_name = '{}' ".format(float(update_or_number[i][0:-1]),float(stock_money_data[i][2]),float(update_or_number[i][0:-1])-float(stock_money_data[i][2]),update_or_name[i])
-                cursor.execute(sql) 
-                connection.commit()
-                data = {
-                    'updata':'yes'
-                }
-            return config.jsonify({'data':data}) ,200
-    data = {
-            'updata':'no'
-    }
-    return config.jsonify({'data':data}) ,200
-
-
+    try:
+        for i in range(30):
+            if group_name[i].string =='電子':
+                continue
+            update_or_number.append(group_number[i].string)
+            update_or_name.append(group_name[i].string)
+        for i in range(len(stock_money_data)):
+            if (float(stock_money_data[i][2]) == float(update_or_number[i][0:-1])) == False:
+                for i in range(len(stock_money_data)):
+                    sql = " UPDATE stock_money SET Transaction_proportion={},Transaction_proportion_yesterday={},Transaction_proportion_vs={} where group_name = '{}' ".format(float(update_or_number[i][0:-1]),float(stock_money_data[i][2]),float(update_or_number[i][0:-1])-float(stock_money_data[i][2]),update_or_name[i])
+                    cursor.execute(sql) 
+                    connection.commit()
+                    data = {
+                        'updata':'yes'
+                    }
+                return config.jsonify({'data':data}) ,200
+        data = {
+                'updata':'no'
+        }
+        return config.jsonify({'data':data}) ,200
+    except:
+        data = {
+                'updata':'error'
+        }
+        return config.jsonify({'data':data}) ,200
 def group_price():
     connection = mysql_connect.link_mysql()
     cursor = connection.cursor()
@@ -63,29 +67,39 @@ def group_price():
     '25','26','27','28','29','30','31','37','38',
     ]
     url_time=0
-    for i in range(len(all_title)):
-        if group_price[i][5] == str(date):
-            continue
-        url="https://histock.tw/twclass/A0"+(all_title[url_time])
-        request=req.Request(url,headers={
-            "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
-        })
-        url_time = url_time+1
-        with req.urlopen(request) as response:
-            data=response.read().decode("utf-8")
+    try:
+        for i in range(len(all_title)):
+            url="https://histock.tw/twclass/A0"+(all_title[url_time])
+            request=req.Request(url,headers={
+                "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+            })
+            with req.urlopen(request) as response:
+                data=response.read().decode("utf-8")
 
 
-        soup=BeautifulSoup(data)
-        group_value=soup.select('div.info-right > div > ul.priceinfo > li > span > span' ) 
-        group_name=soup.select('div.info-left > div > h3' )
-        group_date={
-            'tws':group_value[0].string,
-            'up_or_down':group_value[1].string,
-            'up_or_down_point':group_value[2].string,
-            'tws_money':group_value[3].string,
-            'group_name':group_name[0].string.lstrip()
+            soup=BeautifulSoup(data)
+            group_value=soup.select('div.info-right > div > ul.priceinfo > li > span > span' ) 
+            group_name=soup.select('div.info-left > div > h3' )
+            group_date={
+                'group_price':group_value[0].string,
+                'up_or_down':group_value[1].string,
+                'up_or_down_point':group_value[2].string,
+                'group_money':group_value[3].string,
+                'group_name':group_name[0].string.lstrip()
+            }
+        
+            sql = " UPDATE group_price set group_name='{}' ,group_price='{}' , up_or_down='{}',up_or_down_point='{}' ,group_money='{}' ,date_time='{}' where group_name = '{}'".format(group_date['group_name'][2:],group_date['group_price'],group_date['up_or_down'],group_date['up_or_down_point'],group_date['group_money'],date,group_price[i][1])
+            
+            #sql = "INSERT INTO group_price (group_name ,group_price ,up_or_down ,up_or_down_point, group_money ,date_time) VALUES('{}','{}','{}','{}','{}','{}')".format(group_date['group_name'][2:],group_date['group_price'],group_date['up_or_down'],group_date['up_or_down_point'],group_date['group_money'],date)
+            cursor.execute(sql)
+            connection.commit()
+            url_time = url_time+1
+        data = {
+                    'updata':'yes'
+                }
+        return config.jsonify({'data':data}) ,200
+    except:
+        data = {
+                'updata':'error'
         }
-        sql = " UPDATE group_price set group_name='{}' ,group_price='{}' , up_or_down='{}',up_or_down_point='{}' ,group_money='{}' ,date_time='{}' where group_name = '{}'".format(group_name[0].string.lstrip()[2:],group_value[0].string,group_value[1].string,group_value[2].string,group_value[3].string,date,group_price[i][1])
-        cursor.execute(sql)
-        connection.commit()
-    
+        return config.jsonify({'data':data}) ,200

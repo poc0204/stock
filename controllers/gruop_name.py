@@ -28,3 +28,25 @@ def api_gruop_name(gruop):
     return config.jsonify({'data':gruop_name}) ,200
 
 
+@config.app.route("/api/gruop/<gruop>",methods=['GET'])
+def api_gruop(gruop):
+    if gruop == '化學生技醫療':
+        gruop = '生技醫療'
+    if gruop == '化工':
+        gruop = '化學'
+    if gruop == '電腦及週邊設備':
+        gruop = '電腦週邊'
+    if gruop == '紡織纖維':
+        gruop = '紡織'
+    if gruop == '玻璃陶瓷':
+        gruop = '玻璃'
+    if gruop == '電子零組件':
+        gruop = '電零組'
+    if gruop == '航運業':
+        gruop = '航運'
+    if gruop == '金融保險':
+        gruop = '金融'
+    if gruop == '建材營造':
+        gruop = '營建'
+    group_price_datta = gruop_name_db.group_price(gruop)
+    return config.jsonify({'data':group_price_datta}) ,200

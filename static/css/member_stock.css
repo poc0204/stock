@@ -1,0 +1,52 @@
+
+.stock_third_out{
+    display: flex;
+    width: auto;
+    justify-content: center;
+    background-color:#e76f51;
+  }
+.stock_third{
+     
+      display: flex;
+      text-align: center;
+      flex-wrap:wrap;
+      margin: 15px;
+      justify-content: center;
+  }
+.stock_third > div{
+  background-color:white;
+  padding: 5px;
+  border-radius: 10px;
+
+}
+.stock_third > div > h1{
+  font-size: 35px;
+  margin: 5px;
+}
+.stock_name{
+  font-size: 35px;
+  margin: 5px;
+}
+tbody > tr > .stock_name_title{
+  font-size: 15px;
+  padding: 5px 50px;
+  background:#f7f3f5;
+}
+
+tr > .stock_money_value1{
+  font-size: 15px;
+  padding: 5px 50px;
+
+}
+ tr > .stock_money_value2{
+  font-size: 15px;
+  padding: 5px 50px;
+  background:#f7f3f5
+}
+tr > td > a{
+  text-decoration:none;
+}
+
+tr > td{
+    border-bottom-style: inset;
+}

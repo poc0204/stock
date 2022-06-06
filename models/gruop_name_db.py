@@ -51,3 +51,18 @@ def gruop_name_db(gruop):
             all_data.append(data)
 
     return  all_data
+
+def group_price(group):
+    connection = mysql_connect.link_mysql()
+    cursor = connection.cursor()
+    sql = "select * from group_price where group_name ='{}'".format(group)
+    cursor.execute(sql)
+    gruop_data = cursor.fetchall()
+    data={
+        'group_price':gruop_data[0][2],
+        'up_or_down_point':gruop_data[0][3],
+        'up_or_down':gruop_data[0][4],
+        'group_money':gruop_data[0][5],
+
+    }
+    return  data

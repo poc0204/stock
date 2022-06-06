@@ -31,7 +31,7 @@ body{
     color: #f8f9fa
 }
 
-.signup input[type="text"], .signup input[type="password"]{
+.signup input[type="text"], .signup input[type="password"], .signup input[type="email"]{
     border: 2px solid #3498db;
     width: 220px;
 }
@@ -42,7 +42,7 @@ body{
     cursor:pointer;/* 滑鼠移到這便手指*/
 }
 
-.signup input[type="text"]:focus, .signup input[type="password"]:focus{
+.signup input[type="text"]:focus, .signup input[type="password"]:focus, .signup input[type="email"]:focus{
 
     border-color: #2ecc71;
     width: 280px;
