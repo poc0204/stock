@@ -50,9 +50,10 @@ def signup(member_name,member_email,member_password):
 def login(member_email,member_password):  
     connection = mysql_connect.link_mysql()
     cursor = connection.cursor()
-    sql="select * from member_data where mail = '{}' ".format(member_email)
+    sql="select name , mail ,password from member_data where mail = '{}' ".format(member_email)
     cursor.execute(sql)
     member_data = cursor.fetchall()
+    
     if(member_data == ()):
         data = {
             'success': False,
@@ -61,7 +62,7 @@ def login(member_email,member_password):
         return data
     else:    
         salt = os.getenv('jwt_member')
-        mysql_password = jwt.decode(member_data[0][3],salt,algorithms='HS256')
+        mysql_password = jwt.decode(member_data[0][2],salt,algorithms='HS256')
         if(mysql_password['password'] == member_password):
             headers = {
                 'typ':'jwt',
@@ -69,7 +70,7 @@ def login(member_email,member_password):
             }
             payload = {
                 'e-mail':member_email,
-                'member':member_data[0][1]
+                'member':member_data[0][0]
             }
             token = jwt.encode(payload=payload,key=salt,algorithm='HS256',headers=headers)
             config.session['token'] = token

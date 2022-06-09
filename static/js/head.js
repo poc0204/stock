@@ -1,6 +1,6 @@
-let address_api = 'http:pocworks.store/'
+let address_head = 'http://127.0.0.1:3000/'
 document.addEventListener("DOMContentLoaded",function(){
-  fetch(address_api+'api/member')
+  fetch(address_head+'api/member')
   .then(response =>{
     return  response.json()
   })
@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded",function(){
       }
 
   })
-    setTimeout(function(){
-        let spinner_size = document.getElementById("spinner_size")
-        fadeOut(spinner_size,50);
-        spinner_size.style.display='none'
-        document.body.style.display = 'contents' ;
-        
-      },1000);
+  setTimeout(function(){
+    let spinner_size = document.getElementById("spinner_size")
+    fadeOut(spinner_size,50);
+    spinner_size.style.display='none'
+    document.body.style.display = 'contents' ;
+    
+  },1500);
 
       
     })
@@ -59,22 +59,19 @@ document.addEventListener("DOMContentLoaded",function(){
       }
     
     function login_click(){
-      window.location.href =address_api+"login"
-      console.log("login_click")
+      window.location.href =address_head+"login"
     }
     
     function signup_click(){
-      window.location.href =address_api+"signup"
-      console.log("signup_click")
+      window.location.href =address_head+"signup"
     }
     
     function member_stock(){
-      window.location.href =address_api+"member_stock"
+      window.location.href =address_head+"member_stock"
       console.log("member_stock")
     }
     
     function signout_click(){
-      window.location.href =address_api+"signout"
-      console.log("signout_click")
+      window.location.href =address_head+"signout"
     }
     

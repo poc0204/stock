@@ -1,6 +1,4 @@
-
-
-
+let address_member_sigin = 'http://127.0.0.1:3000/'
 function create_new_member_click(){
     let new_member_name = document.getElementById("new_member_name")
     let new_member_email = document.getElementById("new_member_email")
@@ -29,7 +27,7 @@ function create_new_member_click(){
             'email':new_member_email.value,
             'password':new_member_password.value,
         }
-        let url =address_api+'api/signup';
+        let url =address_member_sigin+'api/signup';
         fetch(url, 
         {
             method: 'POST',
@@ -46,7 +44,7 @@ function create_new_member_click(){
             console.log(data['data']['success'] === true)
             if(data['data']['success']  === true){
                 alert("註冊成功，請重新登入")
-                document.location.href=address_api+'login';
+                document.location.href=address_member_sigin+'login';
             }
             else{
                 if(data['data']['massage']==='帳號重複'){
@@ -54,7 +52,7 @@ function create_new_member_click(){
                 }
                 else{
                     alert("註冊失敗")
-                document.location.href=address_api;
+                document.location.href=address_member_sigin;
                 }
             }
         })

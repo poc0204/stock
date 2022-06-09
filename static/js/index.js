@@ -1,10 +1,7 @@
-
-
-
-
+let address_index = 'http://127.0.0.1:3000/'
 document.addEventListener("DOMContentLoaded",function(){
 
-  fetch(address_api+`api/stock_money`, {method: 'get'})
+  fetch(address_index+`api/stock_money`, {method: 'get'})
   .then(response =>{
     return  response.json()
   })

@@ -1,3 +1,4 @@
+let address_login = 'http://127.0.0.1:3000/' 
 
 function login_click(){
     let email = document.getElementById("member_email")
@@ -21,7 +22,7 @@ function login_click(){
             'email':email.value,
             'password':password.value,
         }
-        let url = address_api+`api/login`;
+        let url = address_login+`api/login`;
         fetch(url, 
         {
           method: 'PATCH',
@@ -30,8 +31,9 @@ function login_click(){
           'Content-Type': 'application/json'
           }
         })
+
         .then(response =>{
-              return  response.json()
+            return  response.json()
         })
         .then( data =>{
             if(data['data']['success'] == false){

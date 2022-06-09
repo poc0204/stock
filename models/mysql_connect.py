@@ -1,4 +1,5 @@
 
+import traceback
 from dbutils.pooled_db import PooledDB
 import pymysql
 import os
@@ -25,11 +26,11 @@ def link_mysql():
         password=os.environ.get('aws_rds_password'),
         database=os.environ.get('database'),
         charset='utf8',
-        ssl=False
         )
         conn = POOL.connection()
 
-    except:
+    except Exception as e:
+            traceback.print_exc(e)
             data ={
             'error':True
             }
