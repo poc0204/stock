@@ -1,4 +1,4 @@
-let address_login = 'http://127.0.0.1:3000/' 
+let address_login = 'http://pocworks.store/'
 
 function login_click(){
     let email = document.getElementById("member_email")

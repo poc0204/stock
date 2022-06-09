@@ -1,4 +1,4 @@
-let address_head = 'http://127.0.0.1:3000/'
+let address_head = 'http://pocworks.store/'
 document.addEventListener("DOMContentLoaded",function(){
   fetch(address_head+'api/member')
   .then(response =>{

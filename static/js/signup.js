@@ -1,4 +1,4 @@
-let address_member_sigin = 'http://127.0.0.1:3000/'
+let address_member_sigin = 'http://pocworks.store/'
 function create_new_member_click(){
     let new_member_name = document.getElementById("new_member_name")
     let new_member_email = document.getElementById("new_member_email")

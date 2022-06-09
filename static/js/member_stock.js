@@ -1,4 +1,4 @@
-let address_member_stock ='http://127.0.0.1:3000/'
+let address_member_stock ='http://pocworks.store/'
 document.addEventListener("DOMContentLoaded",function(){
     fetch(address_member_stock+'api/member_stock_data')
     .then(response =>{
