@@ -1,4 +1,4 @@
-let address_index = 'http://pocworks.store/'
+let address_index = 'https://pocworks.store/'
 document.addEventListener("DOMContentLoaded",function(){
 
   fetch(address_index+`api/stock_money`, {method: 'get'})
