@@ -1,12 +1,9 @@
 
-import traceback
 from dbutils.pooled_db import PooledDB
 import pymysql
 import os
 from dotenv import load_dotenv
 load_dotenv()
-import controllers.msql_error
-import config
 def link_mysql():
     try:
         POOL = PooledDB(
@@ -28,16 +25,6 @@ def link_mysql():
         charset='utf8',
         )
         conn = POOL.connection()
-
-    except Exception as e:
-            traceback.print_exc(e)
-            data ={
-            'error':True
-            }
-            print("error")
-            
-            return data
-            
-    else:
-	    return conn
- 
+        return conn
+    except pymysql.Error as e:
+        print(e.args[0],e.args[1])
