@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 config.app.config['SECRET_KEY'] = os.getenv('jwt_member')
+config.app.config['JSON_AS_ASCII'] = False
 #域名
 host='0.0.0.0'
 #port 號

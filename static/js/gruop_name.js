@@ -72,7 +72,7 @@ fetch(`/api/gruop_name/${gruop_name}`, {method: 'GET'})
     let a_herf = document.getElementById("a_herf"+i);
     let a_herf_data = document.createElement("a");
     a_herf_data.innerText=data['data'][i]['stock_name'];
-    a_herf_data.href='/stock_name/'+data['data'][i]['stock_name'];
+    a_herf_data.href='/stock_name/'+data['data'][i]['stock_id'];
     a_herf_data.style.color='#448899';
     a_herf.appendChild(a_herf_data)
 

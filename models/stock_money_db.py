@@ -1,7 +1,4 @@
-from matplotlib.cbook import print_cycles
 import models.mysql_connect as mysql_connect
-from bs4 import BeautifulSoup
-import urllib.request as req
 import asyncio
 import time
 
@@ -50,8 +47,24 @@ def stock_money():
     async def main():
         tws_date = await asyncio.gather(tws(), group())
         return tws_date  
-    start = time.perf_counter()          
+    #start = time.perf_counter()          
     tws_date = asyncio.run(main())
-    elapsed = time.perf_counter() - start
-    print("執行時間：%f 秒" % elapsed)
+    #elapsed = time.perf_counter() - start
+    #print("執行時間：%f 秒" % elapsed)
     return {"data":tws_date[1],'tws':tws_date[0]}
+
+
+def all_stock():
+    connection = mysql_connect.link_mysql()
+    cursor = connection.cursor()
+    sql = "select stock_id , stock_name from stock_price"
+    cursor.execute(sql)
+    all_stock = cursor.fetchall()
+    json_data=[]
+    for j in range(len(all_stock)):
+            date={
+                'stock_id':all_stock[j][0],
+                'stock_name':all_stock[j][1],
+            }
+            json_data.append(date)
+    return {"data":json_data}

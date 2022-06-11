@@ -77,7 +77,11 @@ nav > a > h1{
   font-size: 30px;
   line-height: 34px;
 }
-
+nav > .search{
+  float: right;
+  padding: 0px;
+  margin: 20px 10px 20px;
+}
 nav > button{
   float: right;
   padding: 0px;
@@ -86,8 +90,37 @@ nav > button{
   margin: 20px 10px 20px;
   font-size: 16px;
 }
+nav > .search_stock > img{
+  width: 22px;
+  height: 22px;
+  background-color:#e76f51;
+}
+nav > .search_stock {
+  margin: 20px -10px;
+}
 nav > .member_name{
   font-size: 16px;
+}
+.search{
+  left: 0;
+  position: relative;
+}
+#auto{
+  display: none;
+  width: 300px;
+  height: 20px;
+  border: 1px #74c0f9 solid;
+  background: #fff;
+  position: absolute;
+  top: 24px;
+  left: 0;
+  color: #323232;
+}
+#auto_div{
+  overflow: auto;
+  overflow-x: hidden; 
+  height: 150px; 
+  width: 170px;
 }
 footer{
     width: 100%;

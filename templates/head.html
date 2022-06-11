@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='./css/head.css') }}">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='./js/head.js') }}" type="text/javascript" ></script> 
     <title>Head</title>
 </head>
@@ -19,6 +20,12 @@
         </div>
         <nav id="nav">
             <a href="/"><h1 >上市個股資金流向</h1></a>
+            <button class="search_stock" id ="search_stock" onclick="search_stock()"><img src="{{ url_for('static', filename='images/seach.png')}}" ></button>
+            <div class="search">
+                <input type="text" id ="search_text"/>
+                <div id ="auto_div">
+                </div>
+            </div>
             <button class="member_stock" id ="member_stock" onclick="member_stock()">自選股</button>
             <button class="signup" id="signout" onclick="signout_click()">登出</button>
             <button class="signup" id="signup" onclick="signup_click()">註冊</button>

@@ -3,10 +3,12 @@ from FinMind.data import DataLoader
 import os
 import datetime
 from dotenv import load_dotenv
-def stock_name_db(stock):
+load_dotenv()
+
+def stock_id(stock):
     connection = mysql_connect.link_mysql()
     cursor = connection.cursor()
-    sql = "select * from stock_price where stock_name ='{}'".format(stock)
+    sql = "select * from stock_price where stock_id ='{}'".format(stock)
     cursor.execute(sql)
     stock_name = cursor.fetchall()
     close = float(stock_name[0][3])
@@ -28,11 +30,8 @@ def stock_name_db(stock):
         'spread_point':'{:.2%}'.format(spread/close),
         'Trading_Volume':Trading_Volume
     }
-    return  data
 
-def stock_id_k(stock):
-    load_dotenv()
-    data =[]
+    stock_data =[]
     Trading_turnover_color=''
     end_date = datetime.date.today()
     start_date = datetime.date.today() - datetime.timedelta(days=365)
@@ -61,5 +60,5 @@ def stock_id_k(stock):
         }
         
  
-        data.append(alldata)
-    return data
+        stock_data.append(alldata)
+    return {'stock_data':stock_data,"data":data}
