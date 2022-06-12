@@ -3,6 +3,7 @@ import jwt
 from datetime import datetime
 import os
 import config
+import pymysql
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -34,7 +35,8 @@ def signup(member_name,member_email,member_password):
                 'massage':'註冊成功'
             }
             return data
-        except:
+        except pymysql.Error as e:
+            print(e.args[0],e.args[1])
             data={
                 'success':False,
                 'massage':'註冊失敗'
