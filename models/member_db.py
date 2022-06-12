@@ -22,9 +22,8 @@ def signup(member_name,member_email,member_password):
             }
             
             password =  jwt.encode(payload,salt)
-            print(password.decode("utf-8"))
             create_time =  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            sql="INSERT INTO member_data (name, mail, password, date_time) VALUES('{}','{}','{}','{}')".format(member_name,member_email,password,create_time)
+            sql="INSERT INTO member_data (name, mail, password, date_time) VALUES('{}','{}','{}','{}')".format(member_name,member_email,password.decode("utf-8"),create_time)
             cursor.execute(sql)
             connection.commit()
 
