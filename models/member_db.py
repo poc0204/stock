@@ -22,7 +22,7 @@ def signup(member_name,member_email,member_password):
             }
             
             member_password =  jwt.encode(payload,salt)
-            print(str(member_password))
+            print(member_password[0])
             create_time =  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             sql="INSERT INTO member_data (name, mail, password, date_time) VALUES('{}','{}','{}','{}')".format(member_name,member_email,member_password,create_time)
             cursor.execute(sql)
