@@ -15,7 +15,7 @@ def signup(member_name,member_email,member_password):
     member_email_data = cursor.fetchall()
     if(member_email_data == ()):
         try:
-            salt = os.getenv('jwt_member')
+            salt = os.environ.get('jwt_member')
 
             payload={
             'password':member_password
@@ -63,7 +63,8 @@ def login(member_email,member_password):
         }
         return data
     else:    
-        salt = os.getenv('jwt_member')
+        salt = os.environ.get('jwt_member')
+        print(jwt.__file__)
         mysql_password = jwt.decode(member_data[0][2],salt,algorithms='HS256')
         if(mysql_password['password'] == member_password):
             headers = {
@@ -90,7 +91,7 @@ def login(member_email,member_password):
             return data
 
 def member_check(token):
-    salt = os.getenv('jwt_member')
+    salt = os.environ.get('jwt_member')
     try:
         member= jwt.decode(token,salt,algorithms='HS256')
         data = {
@@ -191,7 +192,7 @@ def add_stock_data(stock_id):
         
 def get_member_mail():
     token = config.session.get('token')
-    salt = os.getenv('jwt_member')
+    salt = os.environ.get('jwt_member')
     member_email = jwt.decode(token,salt,algorithms='HS256')
     return member_email['e-mail']
 
