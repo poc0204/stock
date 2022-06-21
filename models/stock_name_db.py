@@ -11,7 +11,7 @@ def stock_id(stock):
     sql = "select * from stock_price where stock_id ='{}'".format(stock)
     cursor.execute(sql)
     stock_name = cursor.fetchall()
-    close = float(stock_name[0][3])
+    close = float(stock_name[0][6])
     spread = float(stock_name[0][9])
     Trading_Volume = str(stock_name[0][7])
 

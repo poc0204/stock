@@ -9,13 +9,14 @@ document.addEventListener("DOMContentLoaded",function(){
       return  response.json()
     })
     .then( data =>{
+        console.log(data)
         let stock_name = document.getElementById("stock_name");
         stock_name.innerText=data['data']['data']['stock_neam'];
-        if(data['data']['data']['spread'] < 0.00){
-            stock_color = 'red';
+        if(data['data']['data']['spread'] <= 0.00){
+            stock_color ='green';
             }
         else
-        stock_color ='green';
+        stock_color = 'red';
         let stock = document.getElementById("stock");
         let stock_data = document.createElement("span");
         stock_data.innerText=data['data']['data']['close']
@@ -38,6 +39,10 @@ document.addEventListener("DOMContentLoaded",function(){
         let stock_money_data = document.createElement("span");
         stock_money_data.innerText=data['data']['data']['Trading_Volume']
         stock_money.appendChild(stock_money_data)
+
+        let add_href = document.getElementById('add_href');
+        add_href.href="/api/add_stock/"+data['data']['data']['stock_id'];
+        add_href.style.color='#448899';
             var chart = LightweightCharts.createChart(document.body, {
             width: 1000,
             height: 300,

@@ -5,7 +5,6 @@ def gruop_name_db(gruop):
     sql = "select * from stock_price where group_name ='{}'".format(gruop)
     cursor.execute(sql)
     gruop_name = cursor.fetchall()
-
     all_data =[]
     for i in range(len(gruop_name)):
         Trading_Volume = str(gruop_name[i][7])
@@ -53,6 +52,12 @@ def gruop_name_db(gruop):
     return  all_data
 
 def group_price(group):
+    if group == '電機機械':
+        group = '電機'
+    if group == '電零組':
+        group = '電子零組件' 
+    if group == '其他電子':
+        group = '其它電子'
     connection = mysql_connect.link_mysql()
     cursor = connection.cursor()
     sql = "select * from group_price where group_name ='{}'".format(group)

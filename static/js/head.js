@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded",function(){
         login.style.display='none'
         let signup = document.getElementById("signup")
         signup.style.display='none'
+        let signout = document.getElementById("signout")
+        signout.style.display='block'
         let member_name = document.getElementById("member_name")
         member_name.innerText='Hi! '+data['data']['member_name']
       }

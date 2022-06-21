@@ -1,4 +1,9 @@
+from sys import flags
+from turtle import update
+
+import flask
 import models.mysql_connect as mysql_connect
+from FinMind.data import DataLoader
 from bs4 import BeautifulSoup
 import urllib.request as req
 import config
@@ -6,8 +11,9 @@ import datetime
 import asyncio
 import time
 import aiohttp
+import os
 
-def stock_money_update():
+def stock_money():
     connection = mysql_connect.link_mysql()
     cursor = connection.cursor()  
     # 更新資金流向
@@ -142,3 +148,59 @@ def group_price():
     finally:
         end = time.time()
         print(f'花費時間:{end - start}')
+
+
+def stock_price():
+    connection = mysql_connect.link_mysql()
+    cursor = connection.cursor()
+    sql = "select * from stock_price"
+    cursor.execute(sql)
+    stock_all_price = cursor.fetchall()
+    api = DataLoader()
+    api.login_by_token(api_token=os.getenv('api_token_finmind_y'))
+    # date = datetime.date.today()
+    date = datetime.date.today()
+    tasks =[]
+    async def stock(stock_id,date):
+            try:
+                df = api.taiwan_stock_daily(
+                stock_id=stock_id,
+                start_date=date,
+                end_date=date
+                )
+                sql = "UPDATE stock_price set open={} ,low={} ,high={} ,close={} ,Trading_Volume={} ,spread={} ,date_time='{}' where stock_id ={}".format(float(df['open']),float(df['min']),float(df['max']),float(df['close']),int(df['Trading_Volume']),float(df['spread']),date,int(stock_id))
+                cursor.execute(sql)
+                connection.commit()                    
+            except:
+               return
+
+
+    async def main(stock_all_price):
+        url = "https://api.web.finmindtrade.com/v2/user_info"
+        parload = {
+            "token": os.getenv('api_token_finmind_y'),
+        }
+        resp = config.requests.get(url, params=parload)
+        user_count = resp.json()["user_count"]  # 使用次數
+        stock_time = 0  
+        if user_count >= 600:
+            return {'data':'notyet'}       
+        for i in range(len(stock_all_price)):    
+                if stock_all_price[i][10] == str(date):
+                    continue
+                tasks.append(asyncio.create_task(stock(stock_all_price[i][1],date)))
+                stock_time = stock_time +1
+                if stock_time >= user_count - 100:
+                    await asyncio.wait(tasks)
+                    return {'data':'noyet'}
+        if tasks == []:
+            return {'data':'ok'}
+        await asyncio.wait(tasks)
+        return {'data':'ok'}
+
+    start = time.time()
+    loop = asyncio.new_event_loop()
+    data = loop.run_until_complete(main(stock_all_price))  # 完成事件循环，直到最后一个任务结束
+    end = time.time()
+    print(f'花費時間:{end - start}')
+    return data

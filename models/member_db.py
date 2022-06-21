@@ -23,7 +23,7 @@ def signup(member_name,member_email,member_password):
             
             password =  jwt.encode(payload,salt)
             create_time =  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            sql="INSERT INTO member_data (name, mail, password, date_time) VALUES('{}','{}','{}','{}')".format(member_name,member_email,password.decode("utf-8"),create_time)
+            sql="INSERT INTO member_data (name, mail, password, date_time) VALUES('{}','{}','{}','{}')".format(member_name,member_email,password.encode().decode("utf-8"),create_time)
             cursor.execute(sql)
             connection.commit()
 
@@ -64,7 +64,6 @@ def login(member_email,member_password):
         return data
     else:    
         salt = os.environ.get('jwt_member')
-        print(jwt.__file__)
         mysql_password = jwt.decode(member_data[0][2],salt,algorithms='HS256')
         if(mysql_password['password'] == member_password):
             headers = {

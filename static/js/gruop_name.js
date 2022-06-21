@@ -41,7 +41,6 @@ fetch(`/api/gruop_name/${gruop_name}`, {method: 'GET'})
   return  response.json()
 })
 .then( data =>{
-
     let group_name = document.getElementById("group_name");
     group_name.innerText='上市'+data['data'][0]['group_name'];
     let group_name_third = document.getElementById("group_name_third");
@@ -76,13 +75,12 @@ fetch(`/api/gruop_name/${gruop_name}`, {method: 'GET'})
     a_herf_data.style.color='#448899';
     a_herf.appendChild(a_herf_data)
 
-
     let vs_color
-    if( isInteger(i/2)){
-      vs_color='green'
-    }
+    if(data['data'][i]['spread'] <= 0.00){
+      vs_color ='green';
+      }
     else
-    vs_color='red'
+      vs_color = 'red';
 
     let td_stock_close = document.createElement("td");
     td_stock_close.className=color_value;

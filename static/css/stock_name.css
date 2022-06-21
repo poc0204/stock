@@ -16,7 +16,8 @@
     background-color:white;
     padding: 40px;
     border-radius: 10px;
-
+    height: 150px;
+    width: auto;
   }
   .stock_second_content > h1{
     font-size: 45px;
@@ -55,6 +56,13 @@
   }
   .stock > ul > li > span {
     font-size: 28px;
+  }
+  .add_stock{
+    margin-top: 10px;
+    margin-left: 60px
+  }
+  .add_stock > a{
+  text-decoration:none;
   }
   .stock_second_search > input{
     width: 125px;
@@ -136,7 +144,7 @@
   .tv-lightweight-charts{
     margin: 0px;
     top: -450px;
-    left: 24%;
+    left: 21%;
     position: relative;
 
   }
