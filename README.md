@@ -22,6 +22,7 @@
 * Python APScheduler auto send request to Server mon-fir to update date
 * RESTfulAPI get and post data from Database
 * Member login statement with JWT
+* MVC design 
 # System Architecture
 ![流程圖](https://user-images.githubusercontent.com/93992949/174734841-491acab0-78f4-4980-b382-008c555b9d76.png)
 # Member Login
