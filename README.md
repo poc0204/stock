@@ -1,11 +1,11 @@
 # 上市個股資金流向
-### TWSE Listed Company Stock Price
+### TWSE Listed Company Funds Ratio
 #### Website Url : https://pocworks.store/
 #### Test Account
 * ID:123@yahoo.com
 * Password:1231231
 # Main Features
-* Show TWSE Listed Company Stock Price and TWSE funds ratio
+* Show TWSE Listed Company Funds Ratio and Stock Price
 * Member can add following stock to stock table 
 # System Architecture
 ![流程圖](https://user-images.githubusercontent.com/93992949/174734841-491acab0-78f4-4980-b382-008c555b9d76.png)
