@@ -8,7 +8,7 @@
 * Show TWSE Listed Company Funds Ratio and Stock Price
 * Member can add following stock to stock table 
 # System Architecture
-![流程圖](https://user-images.githubusercontent.com/93992949/174734841-491acab0-78f4-4980-b382-008c555b9d76.png)
+![流程圖](https://user-images.githubusercontent.com/93992949/174955708-ec1e1e33-b828-4dff-a7b7-0d10d2687e23.png)
 # Backend
 * AWS EC2 for Server
 * Docker for deploy website
@@ -26,4 +26,5 @@
 * CSS
 * Javascript
 # Contact
-* poc0204@yahoo.com.tw
+* 張郡驛 
+* Email:poc0204@yahoo.com.tw
