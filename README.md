@@ -2,8 +2,8 @@
 ### TWSE Listed Company Funds Ratio
 #### Website Url : https://pocworks.store/
 #### Test Account
-* ID:123@yahoo.com
-* Password:1231231
+* ID: 123@yahoo.com
+* Password: 1231231
 # Main Features
 * Show TWSE Listed Company Funds Ratio and Stock Price
 * Member can add following stock to stock table 
