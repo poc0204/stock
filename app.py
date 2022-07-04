@@ -6,6 +6,7 @@ from flask_apscheduler import APScheduler
 import urllib.request as req
 import datetime
 from dotenv import load_dotenv
+import requests
 load_dotenv()
 
 config.app.config['SECRET_KEY'] = os.getenv('jwt_member')
@@ -26,7 +27,7 @@ class Config(object):
             'func': '__main__:update_stock_money',     # 指定執行的函式 
             'trigger': 'cron',       # 指定 定時任務的型別
             'day_of_week': 'mon-fri',
-            'hour': '9',
+            'hour': '09',
             'minute': '00',   
             'second':  '00'               # 執行的間隔時間
         },
@@ -35,8 +36,8 @@ class Config(object):
             'func': '__main__:update_group_price',     # 指定執行的函式 
             'trigger': 'cron',       # 指定 定時任務的型別
             'day_of_week': 'mon-fri',
-            'hour': '9',
-            'minute': '05',   
+            'hour': '09',
+            'minute': '01',   
             'second':  '00'                 # 執行的間隔時間         # 執行的間隔時間
         },
         {
@@ -44,8 +45,8 @@ class Config(object):
             'func': '__main__:update_stock_price_fist',     # 指定執行的函式 
             'trigger': 'cron',       # 指定 定時任務的型別
             'day_of_week': 'mon-fri',
-            'hour': '9',
-            'minute': '10',   
+            'hour': '09',
+            'minute': '05',   
             'second':  '00'  
         },
         {
@@ -54,7 +55,7 @@ class Config(object):
             'trigger': 'cron',       # 指定 定時任務的型別
             'day_of_week': 'mon-fri',
             'hour': '10',
-            'minute': '10',   
+            'minute': '05',   
             'second':  '00'  
         },
     ]
@@ -64,27 +65,25 @@ class Config(object):
 def update_stock_money():                          # 執行的定時任務的函式
     #data = update_all.stock_money()
     url="https://pocworks.store/updata/stock_money"
-    request=req.Request(url)
-    print(datetime.datetime.now(),'update_stock_money')
-
+    requests.get(url)
+  
 def update_group_price():   
     #data = update_all.group_price()
     url="https://pocworks.store/updata/group_price"
-    request=req.Request(url)
-    print(datetime.datetime.now(),'update_group_price')
+    requests.get(url)
+   
 
 def update_stock_price_fist():   
     #data = update_all.group_price()
     url="https://pocworks.store/updata/stock_price"
-    request=req.Request(url)
-    print(datetime.datetime.now(),'update_stock_price_fist')
+    requests.get(url)
+    
 
 def update_stock_price_second():   
     #data = update_all.group_price()
     url="https://pocworks.store/updata/stock_price"
-    request=req.Request(url)
-    print(datetime.datetime.now(),'update_stock_price_second')
-
+    requests.get(url)
+   
 if __name__ == '__main__':
     config.app.config.from_object(Config())
 

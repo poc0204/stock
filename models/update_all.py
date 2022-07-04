@@ -1,7 +1,3 @@
-from sys import flags
-from turtle import update
-
-import flask
 import models.mysql_connect as mysql_connect
 from FinMind.data import DataLoader
 from bs4 import BeautifulSoup
@@ -12,6 +8,7 @@ import asyncio
 import time
 import aiohttp
 import os
+import requests
 
 def stock_money():
     connection = mysql_connect.link_mysql()
@@ -160,8 +157,10 @@ def stock_price():
     api.login_by_token(api_token=os.getenv('api_token_finmind_y'))
     # date = datetime.date.today()
     date = datetime.date.today()
-    tasks =[]
+    tasks = []
+    data = {}
     async def stock(stock_id,date):
+            print(stock_id)
             try:
                 df = api.taiwan_stock_daily(
                 stock_id=stock_id,
@@ -172,7 +171,7 @@ def stock_price():
                 cursor.execute(sql)
                 connection.commit()                    
             except:
-               return
+                return
 
 
     async def main(stock_all_price):
@@ -180,27 +179,32 @@ def stock_price():
         parload = {
             "token": os.getenv('api_token_finmind_y'),
         }
-        resp = config.requests.get(url, params=parload)
+        resp = requests.get(url, params=parload)
         user_count = resp.json()["user_count"]  # 使用次數
         stock_time = 0  
-        if user_count >= 600:
-            return {'data':'notyet'}       
-        for i in range(len(stock_all_price)):    
-                if stock_all_price[i][10] == str(date):
-                    continue
-                tasks.append(asyncio.create_task(stock(stock_all_price[i][1],date)))
-                stock_time = stock_time +1
-                if stock_time >= user_count - 100:
-                    await asyncio.wait(tasks)
-                    return {'data':'noyet'}
+
+        if user_count >= 500:
+            data = {'data':'count_not_enough'}
+            return data
+
+        for i in range(len(stock_all_price)):
+                if stock_all_price[i][10] != str(date):
+                    tasks.append(asyncio.create_task(stock(stock_all_price[i][1],date)))
+                    stock_time = stock_time + 1
+                    if stock_time >= (600 - user_count) - 100:
+                        data = {'data':'notyet'}
+                        await asyncio.wait(tasks)
+                        return data
+
         if tasks == []:
-            return {'data':'ok'}
+            data =  {'data':'ok'}
+            return data
+        data =  {'data':'ok'}
         await asyncio.wait(tasks)
-        return {'data':'ok'}
+        return data
 
     start = time.time()
-    loop = asyncio.new_event_loop()
-    data = loop.run_until_complete(main(stock_all_price))  # 完成事件循环，直到最后一个任务结束
+    data = asyncio.run(main(stock_all_price))  # 完成事件循环，直到最后一个任务结束
     end = time.time()
     print(f'花費時間:{end - start}')
-    return data
+    return config.jsonify({'data':data}) ,200
