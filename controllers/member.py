@@ -1,7 +1,9 @@
-
 import config
 import models.member_db as member_db
-import json , re
+import json 
+import os
+import boto3
+import base64
 
 @config.app.route("/login")
 def login():
@@ -35,7 +37,7 @@ def api_signup():
     return config.jsonify({'data':data}) ,200
 
 @config.app.route("/member_stock")
-def member():
+def member_stock():
     token = config.session.get('token')
     data = member_db.member_check(token)
     if(data['member']==False):
@@ -62,7 +64,44 @@ def api_add_stock_data(stock_id):
 def delete_stock(stock_id):
     member_db.delete_stock(stock_id)
     return config.render_template("member_stock.html")
+
 @config.app.route("/signout")
 def signout():
     config.session.clear()
     return config.redirect("/")
+
+@config.app.route("/member/<member_name>")
+def member(member_name):  
+    return config.render_template("member.html")
+
+@config.app.route("/member_put_image", methods=["post"])
+def member_put_image():
+    token = config.session.get('token')
+    data = member_db.member_check(token)
+    e_mail= data['e-mail']
+    image_data = config.request.files.get("image_data")
+    data = member_db.member_put_image_db(image_data,e_mail)
+    return config.jsonify({'data':data}) ,200
+
+@config.app.route("/member_get_image")
+def member_get_image():
+    token = config.session.get('token')
+    data = member_db.member_check(token)
+    data = member_db.member_get_image_db(data['e-mail'])
+
+    return config.jsonify({'data':data}) ,200
+
+@config.app.route("/check_member_password",methods=["post"])
+def check_member_password():
+    token = config.session.get('token')
+    member_email = member_db.member_check(token)
+    data = json.loads(config.request.data)
+    member_password_old = data['password_old']
+    member_password_new= data['password_new']
+    data = member_db.login(member_email['e-mail'],member_password_old)
+    if data['success']==True:
+        data = member_db.member_update_password(member_email['e-mail'],member_password_new)
+        config.session.clear()
+        return config.jsonify({'data':data}) ,200
+    else :
+        return config.jsonify({'data':data}) ,200

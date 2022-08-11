@@ -3,8 +3,6 @@ import controllers.index , controllers.msql_error , controllers.update , control
 import controllers.gruop_name , controllers.stock_name 
 import os
 from flask_apscheduler import APScheduler
-import urllib.request as req
-import datetime
 from dotenv import load_dotenv
 import requests
 load_dotenv()

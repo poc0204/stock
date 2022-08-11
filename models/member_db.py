@@ -5,6 +5,8 @@ import os
 import config
 import pymysql
 from dotenv import load_dotenv
+from boto3.session import Session
+import time
 load_dotenv()
 
 def signup(member_name,member_email,member_password):
@@ -23,7 +25,7 @@ def signup(member_name,member_email,member_password):
             
             password =  jwt.encode(payload,salt)
             create_time =  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            sql="INSERT INTO member_data (name, mail, password, date_time) VALUES('{}','{}','{}','{}')".format(member_name,member_email,password.encode().decode("utf-8"),create_time)
+            sql="INSERT INTO member_data (name, mail, password, date_time, image) VALUES('{}','{}','{}','{}','{}')".format(member_name,member_email,password.encode().decode("utf-8"),create_time,'666.jpg')
             cursor.execute(sql)
             connection.commit()
 
@@ -95,7 +97,8 @@ def member_check(token):
         member= jwt.decode(token,salt,algorithms='HS256')
         data = {
             'member':True,
-            'member_name': member['member']
+            'member_name': member['member'],
+            'e-mail': member['e-mail']
         }
         return data
     except:
@@ -196,10 +199,66 @@ def get_member_mail():
     return member_email['e-mail']
 
 
+def member_put_image_db(image_data,e_mail):
+    aws_key =  os.environ.get('aws_access_key_id')# 【你的 aws_access_key】
+    aws_secret = os.environ.get('aws_secret_access_key') # 【你的 aws_secret_key】
+    session = Session(aws_access_key_id=aws_key,
+    aws_secret_access_key=aws_secret,
+    region_name="us-east-1") # 此處根據自己的 s3 地區位置改變
+    s3 = session.resource("s3")
+    bucket = os.environ.get('aws_s3')# 【你 bucket 的名字】 # 首先需要保證 s3 上已經存在該儲存桶，否則報錯
+    member_image = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())) + str(time.time()).replace('.','')[-7:])
+    member_image_id=member_image+image_data.filename
+    connection = mysql_connect.link_mysql()
+    cursor = connection.cursor()
+    try:
+        sql="select image from member_data where mail = '{}'".format(e_mail)
+        cursor.execute(sql)
+        data = cursor.fetchone()
+        image = os.environ.get('s3_image')
+        if data[0] != image:
+            s3.Bucket(bucket).object_versions.filter(Prefix=data[0]).delete()
+
+        sql="UPDATE member_data set image = '{}' where mail = '{}'".format(member_image_id,e_mail)
+        cursor.execute(sql)
+        connection.commit()
+        s3.Bucket(bucket).put_object(Key=member_image_id, Body=image_data, ContentType='image/jpeg')
+        data={
+            'massage':'success'
+        }
+    except:
+        data={
+            'massage':'失敗'
+        }
+    return data
 
 
+def member_get_image_db(e_mail):
+    connection = mysql_connect.link_mysql()
+    cursor = connection.cursor()
+    sql="select image from member_data where mail = '{}'".format(e_mail)
+    cursor.execute(sql)
+    data = cursor.fetchone()
+    return data[0]
 
-
-
-
- 
+def member_update_password(e_mail,password):
+    try:
+        salt = os.environ.get('jwt_member')
+        payload={
+                'password':password
+                }
+        password =  jwt.encode(payload,salt)     
+        connection = mysql_connect.link_mysql()
+        cursor = connection.cursor()
+        sql = "update member_data set password='{}' where mail ='{}' ".format(password,e_mail)
+        cursor.execute(sql)
+        connection.commit()
+        data ={
+            'success':True
+        }
+        return data
+    except:
+        data ={
+        'success':False
+        }
+        return data

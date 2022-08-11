@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded",function(){
         let signout = document.getElementById("signout")
         signout.style.display='block'
         let member_name = document.getElementById("member_name")
-        member_name.innerText='Hi! '+data['data']['member_name']
+        member_name.innerText=data['data']['member_name']
       }
 
   })
@@ -132,7 +132,7 @@ window.location.href =address_head+"signup"
 
 function member_stock(){
 window.location.href =address_head+"member_stock"
-console.log("member_stock")
+
 }
 
 function signout_click(){
@@ -143,3 +143,7 @@ function search_stock(){
   window.location.href =address_head+"stock_name/"+stock_id.value.slice(0,4)
   }
   
+function member_click(){
+  let member_name = document.getElementById('member_name')
+  window.location.href =address_head+"member/"+member_name.innerText
+}
