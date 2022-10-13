@@ -3,6 +3,10 @@ let address_member ='https://pocworks.store/'
 
 
 document.addEventListener("DOMContentLoaded",function(){
+
+    axios.get(address_member+'kline').then((res) => {
+        let kline = document.getElementById('kline');
+    })
     axios.get(address_member+'api/member').then((res) => {
         let member_name = document.getElementById('name');
         let member_mail = document.getElementById('member_mail');

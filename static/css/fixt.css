@@ -1,0 +1,17 @@
+.fixt{
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+.fixt_size{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 80%;
+}
+.fixt_content > p{
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+}

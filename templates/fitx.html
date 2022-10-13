@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='./css/fixt.css') }}">
+    <script src="{{ url_for('static', filename='./js/fixt.js') }}" type="text/javascript " ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"  type="text/javascript"></script>
+    <script type="text/javascript" script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"></script>
+    <title>Fitx</title>
+</head>
+<body>
+    {% extends 'head.html' %}
+    {% block header %}
+    <div class="fixt">
+        <div class="fixt_size">
+            <div class="fixt_content">
+                <p><a>最大震幅</a><a id="hight_low" class="hight_low"></a><a>震幅</a><a id="now_hight_low" class="now_hight_low"></a></p>
+                <p><a>目前價格</a><a id="LastPrice" class="LastPrice"></a></p>
+                <p id="fist_level_color"><a>一壘關卡</a><a id="fist_level" class="fist_level"></a></p>    
+                <p id="second_level_color"><a>二壘關卡</a><a id="second_level" class="second_level"></a></p>
+                <p id="third_level_color"><a>三壘關卡</a><a id="third_level" class="third_level"></a></p> 
+                <p id="Four_level_color"><a>全壘關卡</a><a id="Four_level" class="Four_level"></a></p>
+                <p id="five_level_color"><a>場外關卡</a><a id="five_level" class="five_level"></a></p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

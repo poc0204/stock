@@ -140,3 +140,40 @@ footer{
     font-size: 16px;
     color: #FFFFFF;
   }
+
+  @media only screen and (max-width:1250px){
+    nav {
+      width: 1000px;
+    }
+  }
+
+  @media only screen and (max-width:1024px){
+    nav {
+      width: 800px;
+    }
+  }
+
+  @media only screen and (max-width:800px){
+    nav {
+      width: 650px;
+    }
+    .search{
+      width: 104px;
+    }
+    .search > input {
+      width: 104px;
+    }
+    #auto_div{
+      width: 107px;
+    }
+  }
+
+  @media only screen and (max-width:425px){
+    nav {
+      width: 400px;
+    }
+    nav > a > h1 {
+      font-size: 20px;
+    }
+  }
+
