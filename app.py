@@ -11,7 +11,7 @@ import pandas as pd
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime,timezone,timedelta
 from dotenv import load_dotenv
-
+import requests
 load_dotenv()
 
 config.app.config['SECRET_KEY'] = os.getenv('jwt_member')
@@ -102,27 +102,27 @@ class Config(object):
     SCHEDULER_API_ENABLED = True
     SCHEDULER_TIMEZONE = 'Asia/Shanghai'
 
-# def update_stock_money():                          # 執行的定時任務的函式
-#     #data = update_all.stock_money()
-#     url="https://pocworks.store/updata/stock_money"
-#     requests.get(url)
+def update_stock_money():                          # 執行的定時任務的函式
+    #data = update_all.stock_money()
+    url="https://pocworks.store/updata/stock_money"
+    requests.get(url)
   
-# def update_group_price():   
-#     #data = update_all.group_price()
-#     url="https://pocworks.store/updata/group_price"
-#     requests.get(url)
+def update_group_price():   
+    #data = update_all.group_price()
+    url="https://pocworks.store/updata/group_price"
+    requests.get(url)
    
 
-# def update_stock_price_fist():   
-#     #data = update_all.group_price()
-#     url="https://pocworks.store/updata/stock_price"
-#     requests.get(url)
+def update_stock_price_fist():   
+    #data = update_all.group_price()
+    url="https://pocworks.store/updata/stock_price"
+    requests.get(url)
     
 
-# def update_stock_price_second():   
-#     #data = update_all.group_price()
-#     url="https://pocworks.store/updata/stock_price"
-#     requests.get(url)
+def update_stock_price_second():   
+    #data = update_all.group_price()
+    url="https://pocworks.store/updata/stock_price"
+    requests.get(url)
 
 def update_tse():
     tse.tse_update()
