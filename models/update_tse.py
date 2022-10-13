@@ -62,7 +62,7 @@ def tse_update():
     check_stock_class_money_db = cursor.fetchall()
 
     if len(check_stock_class_money_db) == 0 :
-        print("開始更新資金流向")
+        #print("開始更新資金流向")
         # 當日大盤成交金額
         url ="https://www.twse.com.tw/zh/exchangeReport/MI_INDEX"
         tse = requests.get(url)
@@ -92,9 +92,9 @@ def tse_update():
             cursor.execute(sql)
             connection.commit()
             stock_TradeValuev = 0
-        print("更新完畢資金流向")
-    else:
-        print("已更新過")
+    #     print("更新完畢資金流向")
+    # else:
+    #     print("已更新過")
  
     # 個股資料整理把類股名稱改成代號
     tse_stock = pd.DataFrame(tse_stock, columns=['id','name','class_name','TradeVolume','TradeValuev','open','hight','low','colse','point','date_time'])
@@ -118,7 +118,7 @@ def tse_update():
             sql="insert into tse_stock_name(tse_stock_id ,stock_name ) value('{}','{}')".format(compare.at[i ,'id'],compare.at[i ,'name'])
             cursor.execute(sql)
             connection.commit()
-    print("今日沒有新增各股")
+    #print("今日沒有新增各股")
 
     # 判斷有無新增個股明細
     sql="select date_time from tse_stock_price where date_time = '{}' ".format(stcok_data_text['date'])
@@ -139,11 +139,11 @@ def tse_update():
                         tse_stock.at[i ,'open'],tse_stock.at[i ,'hight'],tse_stock.at[i ,'low'],tse_stock.at[i ,'colse'],tse_stock.at[i ,'TradeVolume'],tse_stock.at[i ,'point'],tse_stock.at[i ,'date_time'])
                 cursor.execute(sql)
             except pymysql.Error as error :
-                print(tse_stock.at[i ,'point'])
+                #print(tse_stock.at[i ,'point'])
                 connection.rollback()
         connection.commit()
-        print("tse_stock更新結束")
+        #print("tse_stock更新結束")
 
     
     connection.close()
-    print("tse全部更新結束")
+    #print("tse全部更新結束")

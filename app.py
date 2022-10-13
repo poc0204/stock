@@ -28,60 +28,60 @@ aps = APScheduler()
 
 class Config(object):
     JOBS = [
-        # {
-        #     'id': 'update_stock_money',                # 一個標識
-        #     'func': '__main__:update_stock_money',     # 指定執行的函式 
-        #     'trigger': 'cron',       # 指定 定時任務的型別
-        #     'day_of_week': 'mon-fri',
-        #     'hour': '17',
-        #     'minute': '15',   
-        #     'second':  '00'               # 執行的間隔時間
-        # },
-        # {
-        #     'id': 'update_group_price',                # 一個標識
-        #     'func': '__main__:update_group_price',     # 指定執行的函式 
-        #     'trigger': 'cron',       # 指定 定時任務的型別
-        #     'day_of_week': 'mon-fri',
-        #     'hour': '17',
-        #     'minute': '20',   
-        #     'second':  '00'                 # 執行的間隔時間         # 執行的間隔時間
-        # },
-        # {
-        #     'id': 'update_stock_price_fist',                # 一個標識
-        #     'func': '__main__:update_stock_price_fist',     # 指定執行的函式 
-        #     'trigger': 'cron',       # 指定 定時任務的型別
-        #     'day_of_week': 'mon-fri',
-        #     'hour': '17',
-        #     'minute': '30',   
-        #     'second':  '00'  
-        # },
-        # {
-        #     'id': 'update_stock_price_second',                # 一個標識
-        #     'func': '__main__:update_stock_price_second',     # 指定執行的函式 
-        #     'trigger': 'cron',       # 指定 定時任務的型別
-        #     'day_of_week': 'mon-fri',
-        #     'hour': '10',
-        #     'minute': '05',   
-        #     'second':  '00'  
-        # },
-        # {   # 新增資金流向表
-        #     'id': 'update_tse',                # 一個標識
-        #     'func': '__main__:update_tse',     # 指定執行的函式 
-        #     'trigger': 'cron',       # 指定 定時任務的型別
-        #     'day_of_week': 'mon-fri',
-        #     'hour': '17',
-        #     'minute': '00',   
-        #     'second':  '00'               # 執行的間隔時間
-        # },
-        # {   # 新增日振幅
-        #     'id': 'update_fixt',                # 一個標識
-        #     'func': '__main__:update_fixt',     # 指定執行的函式 
-        #     'trigger': 'cron',       # 指定 定時任務的型別
-        #     'day_of_week': 'mon-fri',
-        #     'hour': '17',
-        #     'minute': '05',   
-        #     'second':  '00'               # 執行的間隔時間
-        # },
+        {
+            'id': 'update_stock_money',                # 一個標識
+            'func': '__main__:update_stock_money',     # 指定執行的函式 
+            'trigger': 'cron',       # 指定 定時任務的型別
+            'day_of_week': 'mon-fri',
+            'hour': '17',
+            'minute': '15',   
+            'second':  '00'               # 執行的間隔時間
+        },
+        {
+            'id': 'update_group_price',                # 一個標識
+            'func': '__main__:update_group_price',     # 指定執行的函式 
+            'trigger': 'cron',       # 指定 定時任務的型別
+            'day_of_week': 'mon-fri',
+            'hour': '17',
+            'minute': '20',   
+            'second':  '00'                 # 執行的間隔時間         # 執行的間隔時間
+        },
+        {
+            'id': 'update_stock_price_fist',                # 一個標識
+            'func': '__main__:update_stock_price_fist',     # 指定執行的函式 
+            'trigger': 'cron',       # 指定 定時任務的型別
+            'day_of_week': 'mon-fri',
+            'hour': '17',
+            'minute': '30',   
+            'second':  '00'  
+        },
+        {
+            'id': 'update_stock_price_second',                # 一個標識
+            'func': '__main__:update_stock_price_second',     # 指定執行的函式 
+            'trigger': 'cron',       # 指定 定時任務的型別
+            'day_of_week': 'mon-fri',
+            'hour': '17',
+            'minute': '50',   
+            'second':  '00'  
+        },
+        {   # 新增資金流向表
+            'id': 'update_tse',                # 一個標識
+            'func': '__main__:update_tse',     # 指定執行的函式 
+            'trigger': 'cron',       # 指定 定時任務的型別
+            'day_of_week': 'mon-fri',
+            'hour': '17',
+            'minute': '00',   
+            'second':  '00'               # 執行的間隔時間
+        },
+        {   # 新增日振幅
+            'id': 'update_fixt',                # 一個標識
+            'func': '__main__:update_fixt',     # 指定執行的函式 
+            'trigger': 'cron',       # 指定 定時任務的型別
+            'day_of_week': 'mon-fri',
+            'hour': '17',
+            'minute': '05',   
+            'second':  '00'               # 執行的間隔時間
+        },
 
         # {   # sokcetio
         #     'id': 'fitx_data',                # 一個標識
@@ -92,12 +92,12 @@ class Config(object):
         #     'minute': '45',   
         #     'second':  '01'                       # 執行的間隔時間   
         # },
-        {   # sokcetio_test
-            'id': 'fitx_test',                # 一個標識
-            'func': '__main__:fitx_test',     # 指定執行的函式 
-            'trigger': 'interval', 
-            'seconds': 2      
-        },
+        # {   # sokcetio_test
+        #     'id': 'fitx_test',                # 一個標識
+        #     'func': '__main__:fitx_test',     # 指定執行的函式 
+        #     'trigger': 'interval', 
+        #     'seconds': 2      
+        # },
     ]
     SCHEDULER_API_ENABLED = True
     SCHEDULER_TIMEZONE = 'Asia/Shanghai'

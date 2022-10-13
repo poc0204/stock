@@ -1,4 +1,4 @@
-let address_member ='http://127.0.0.1:3000/'
+let address_member ='https://pocworks.store/'
 document.addEventListener("DOMContentLoaded",function(){
 
     let amplitude_date =JSON.parse(localStorage.getItem('amplitude_date'))

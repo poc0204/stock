@@ -17,16 +17,16 @@ def fitx_update():
         cursor.execute(sql)
         data = cursor.fetchall()
         if len(data) == 0 :
-            print("開始更新fitx")
+            #print("開始更新fitx")
             sql="insert into fitx(date_time ,open ,hight ,low ,cloes ,amplitude)\
                 values('{}',{},{},{},{},{})".format(date,int(txs[2].string),int(txs[3].string),int(txs[4].string),int(txs[5].string),int(txs[3].string)-int(txs[4].string))
             cursor.execute(sql)
             connection.commit()
             #tx.append({'日期':i.string[3:],'開盤價':int(txs[2].string),'最高價':int(txs[3].string),'最低價':int(txs[4].string),'收盤價':int(txs[5].string)})
-        else:
-            print("今日已更新")
-    else:
-        print('今日沒開盤')
+    #     else:
+    #        print("今日已更新")
+    # else:
+    #     print('今日沒開盤')
 
     connection.close()
-    print("fitx更新完畢")
+    #print("fitx更新完畢")
