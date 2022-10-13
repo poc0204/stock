@@ -1,7 +1,7 @@
 import config
 import models.update_tse as tse
 import models.update_fixt as fixt
-import models.update_all as stock
+import models.update_all as update_all
 import controllers.index , controllers.msql_error , controllers.update , controllers.stock_money , controllers.member
 import controllers.gruop_name , controllers.stock_name , controllers.fitx
 import os
@@ -103,26 +103,26 @@ class Config(object):
     SCHEDULER_TIMEZONE = 'Asia/Shanghai'
 
 def update_stock_money():                          # 執行的定時任務的函式
-    #data = update_all.stock_money()
-    url="https://pocworks.store/updata/stock_money"
-    requests.get(url)
+    update_all.stock_money()
+    # url="https://pocworks.store/updata/stock_money"
+    # requests.get(url)
   
 def update_group_price():   
-    #data = update_all.group_price()
-    url="https://pocworks.store/updata/group_price"
-    requests.get(url)
+    update_all.group_price()
+    # url="https://pocworks.store/updata/group_price"
+    # requests.get(url)
    
 
 def update_stock_price_fist():   
-    #data = update_all.group_price()
-    url="https://pocworks.store/updata/stock_price"
-    requests.get(url)
+    update_all.group_price()
+    # url="https://pocworks.store/updata/stock_price"
+    # requests.get(url)
     
 
 def update_stock_price_second():   
-    #data = update_all.group_price()
-    url="https://pocworks.store/updata/stock_price"
-    requests.get(url)
+    data = update_all.group_price()
+    # url="https://pocworks.store/updata/stock_price"
+    # requests.get(url)
 
 def update_tse():
     tse.tse_update()
