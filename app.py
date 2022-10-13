@@ -6,18 +6,17 @@ import controllers.index , controllers.msql_error , controllers.update , control
 import controllers.gruop_name , controllers.stock_name , controllers.fitx
 import os
 from flask_apscheduler import APScheduler
-import requests as req
+import requests
 import pandas as pd
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime,timezone,timedelta
 from dotenv import load_dotenv
-import requests
 load_dotenv()
 
 config.app.config['SECRET_KEY'] = os.getenv('jwt_member')
 config.app.config['JSON_AS_ASCII'] = False
-socketio = config.SocketIO(config.app)
-#域名
+# socketio = config.SocketIO(config.app)
+# #域名
 host='0.0.0.0'
 #port 號
 port=3000
@@ -130,59 +129,59 @@ def update_tse():
 def update_fixt():
     fixt.fitx_update()
 
-@config.app.route("/fitx")
-def fitxs():
-    return config.render_template("fitx.html", async_mode=socketio.async_mode)
+# @config.app.route("/fitx")
+# def fitxs():
+#     return config.render_template("fitx.html", async_mode=socketio.async_mode)
 
-def fitx_test():
-    url="https://pocworks.store/api/fitx"
-    config.requests.get(url)
+# def fitx_test():
+#     url="https://pocworks.store/api/fitx"
+#     config.requests.get(url)
 
-def fitx_data():
-    dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
-    dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
-    now_time = dt2.strftime("%H:%M:%S")
-    while now_time < '13:44:59':
-        dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
-        dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
-        now_time = dt2.strftime("%H:%M:%S")
-        url="https://pocworks.store/api/fitx"
-        config.requests.get(url)
+# def fitx_data():
+#     dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+#     dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
+#     now_time = dt2.strftime("%H:%M:%S")
+#     while now_time < '13:44:59':
+#         dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+#         dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
+#         now_time = dt2.strftime("%H:%M:%S")
+#         url="https://pocworks.store/api/fitx"
+#         config.requests.get(url)
 
     
 
-@config.app.route("/api/fitx")
-def api_fitx():
-    url=os.environ.get('api_fitx')
-    payload = {"MarketType":"0",
-            "SymbolType":"F",
-            "KindID":"1",
-            "CID":"TXF",
-            "ExpireMonth":"",
-            "RowSize":"全部",
-            "PageNo":"",
-            "SortColumn":"",
-            "AscDesc":"A"}
-    day_time = ''
-    day_value = ''
-    res =req.post(url, json = payload)
-    data = res.json()
-    df = pd.DataFrame(data['RtData']['QuoteList'])
-    # df= df[["DispCName", "Status", "CBidPrice1", "CBidSize1", "CAskPrice1", "CAskSize1", "CLastPrice", "CDiff", "CAmpRate", "CTotalVolume", "COpenPrice", "CHighPrice", "CLowPrice", "CRefPrice", "CTime"]]
-    # df.columns = ['商品', '狀態', '買進', '買量', '賣出', '賣量', '成交價', '漲跌', '振幅%', '成交量', '開盤', '最高', '最低', '參考價', '時間']
-    hight = int(df.iat[1,11].replace('.00',""))
-    low = int(df.iat[1,12].replace('.00',""))
-    #day_time= df.iat[1,14]
-    # if day_value != df.iat[1,9]:
-    #     print(hight-low)
-    #     print(df.loc[[1],['時間','買進','賣出','成交價','成交量']])
-    #day_value =  df.iat[1,9]
-    OpenPrice = int(df.iat[1,10].replace('.00',""))
-    LastPrice = int(df.iat[1,7].replace('.00',""))
-    hight_low = hight-low
-    now_hight_low = str(OpenPrice-LastPrice).replace('-',"")
-    socketio.emit('api_fitx', {'LastPrice':LastPrice,'hight_low':hight_low,'OpenPrice':OpenPrice,'now_hight_low':now_hight_low,'hight':hight,'low':low})
-    return config.jsonify({"response": "ok"})
+# @config.app.route("/api/fitx")
+# def api_fitx():
+#     url=os.environ.get('api_fitx')
+#     payload = {"MarketType":"0",
+#             "SymbolType":"F",
+#             "KindID":"1",
+#             "CID":"TXF",
+#             "ExpireMonth":"",
+#             "RowSize":"全部",
+#             "PageNo":"",
+#             "SortColumn":"",
+#             "AscDesc":"A"}
+#     day_time = ''
+#     day_value = ''
+#     res =req.post(url, json = payload)
+#     data = res.json()
+#     df = pd.DataFrame(data['RtData']['QuoteList'])
+#     # df= df[["DispCName", "Status", "CBidPrice1", "CBidSize1", "CAskPrice1", "CAskSize1", "CLastPrice", "CDiff", "CAmpRate", "CTotalVolume", "COpenPrice", "CHighPrice", "CLowPrice", "CRefPrice", "CTime"]]
+#     # df.columns = ['商品', '狀態', '買進', '買量', '賣出', '賣量', '成交價', '漲跌', '振幅%', '成交量', '開盤', '最高', '最低', '參考價', '時間']
+#     hight = int(df.iat[1,11].replace('.00',""))
+#     low = int(df.iat[1,12].replace('.00',""))
+#     #day_time= df.iat[1,14]
+#     # if day_value != df.iat[1,9]:
+#     #     print(hight-low)
+#     #     print(df.loc[[1],['時間','買進','賣出','成交價','成交量']])
+#     #day_value =  df.iat[1,9]
+#     OpenPrice = int(df.iat[1,10].replace('.00',""))
+#     LastPrice = int(df.iat[1,7].replace('.00',""))
+#     hight_low = hight-low
+#     now_hight_low = str(OpenPrice-LastPrice).replace('-',"")
+#     socketio.emit('api_fitx', {'LastPrice':LastPrice,'hight_low':hight_low,'OpenPrice':OpenPrice,'now_hight_low':now_hight_low,'hight':hight,'low':low})
+#     return config.jsonify({"response": "ok"})
 
 
 if __name__ == '__main__':
@@ -191,5 +190,5 @@ if __name__ == '__main__':
     scheduler.init_app(config.app)
     scheduler.start()
     # 啟動flask
-    #config.app.run(host=host, port=port)
-    socketio.run(config.app, debug=True,host=host, port=port ,use_reloader=False)
+    config.app.run(host=host, port=port)
+    # socketio.run(config.app, debug=True,host=host, port=port ,use_reloader=False)
